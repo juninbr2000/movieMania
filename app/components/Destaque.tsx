@@ -21,7 +21,7 @@ export default function Destaque ({tipo, backdrop, title, overview, id}: typeDes
         backgroundPosition: 'center',
         backgroundSize: 'cover'
        }}
-       className="flex flex-col h-[30vh] mb-6 rounded-lg justify-between items-start px-4 py-2"
+       className="flex flex-col h-[30vh] mb-6 rounded-lg justify-between items-start px-4 py-2 md:h-[45vh] lg:h-[60vh]"
        >
             <div>
                 {tipo === 'destaque' && <h1 className="flex items-center gap-2 w-32 px-4 py-1 rounded-full text-yellow-400 font-bold text-lg bg-slate-900 bg-opacity-70"><FaStar /> Em alta!</h1>}

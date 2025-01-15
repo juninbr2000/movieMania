@@ -3,21 +3,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaCalendar, FaClock, FaStar, FaArrowRight, FaPlus } from "react-icons/fa";
 
-export default async function moviePage({ params }: { params: { id: string } }) {
+
+export default async function moviePage({ params }: {params: Promise<{ id: string }>}) {
+
+  const { id } = await params
+
   const apiKey = process.env.NEXT_PUBLIC_API_KEY;
   const apiRoute = process.env.NEXT_PUBLIC_API_ROUTE;
   const imageRoute = process.env.NEXT_PUBLIC_IMG;
 
-  const movieResponse = await fetch(`${apiRoute}${params.id}?language=pt-br&${apiKey}`);
+  const movieResponse = await fetch(`${apiRoute}${id}?language=pt-br&${apiKey}`);
   const movie = await movieResponse.json();
 
-  const getRecomends = await fetch(`${apiRoute}${params.id}/recommendations?language=pt-br&include_adults=false&${apiKey}`)
+  const getRecomends = await fetch(`${apiRoute}${id}/recommendations?language=pt-br&include_adults=false&${apiKey}`)
   const recommendations = await getRecomends.json()
 
-  const getCredits = await fetch(`${apiRoute}${params.id}/credits?language=pt-br&${apiKey}`)
+  const getCredits = await fetch(`${apiRoute}${id}/credits?language=pt-br&${apiKey}`)
   const credits = await getCredits.json()
 
-  const getProviders = await fetch(`${apiRoute}${params.id}/watch/providers?${apiKey}`)
+  const getProviders = await fetch(`${apiRoute}${id}/watch/providers?${apiKey}`)
   const providers = await getProviders.json()
 
   console.log(providers)

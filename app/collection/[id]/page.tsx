@@ -1,13 +1,17 @@
 import CardMovie from "@/app/components/CardMovie";
 import Image from "next/image";
 
-export default async function Collections({ params }: { params: { id: string } }) {
+
+export default async function Collections({ params }: {params: Promise<{ id: string }>}) {
+
+  const { id } = await params
+
   const apiKey = process.env.NEXT_PUBLIC_API_KEY;
   const collectionRoute = process.env.NEXT_PUBLIC_COLLECTION;
   const imageRoute = process.env.NEXT_PUBLIC_IMG;
 
   const collectionfetch = await fetch(
-    `${collectionRoute}${params.id}?language=pt-br&${apiKey}`
+    `${collectionRoute}${id}?language=pt-br&${apiKey}`
   );
   const collection = await collectionfetch.json();
 
